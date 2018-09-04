@@ -65,5 +65,5 @@ if __name__ == "__main__":
     print(len(collectionStations))
     for i in range(len(collectionStations)):
         oldDir = os.path.join(_ROOTDIR, collectionStations[i] + '.csv')
-        CopyFileToAnotherFolder()
+        CopyFileToAnotherFolder(oldDir, _NewDir)
 
