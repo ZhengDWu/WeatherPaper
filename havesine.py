@@ -1,7 +1,11 @@
 # -*- coding: utf8 -*-
 
 from math import radians, cos, sin, asin, sqrt
+import os
+import shutil
 
+_ROOTDIR = 'E:\\WeatherData\\Data'
+_NewDir  = 'E:\\WeatherData\\NewData'
 
 def haversine(lon1, lat1, lon2, lat2): # 经度1，纬度1，经度2，纬度2 （十进制度数）
     """
@@ -36,6 +40,15 @@ def read(filePath):
             line = f.readline()
     return stations, lats, lons
 
+def CopyFileToAnotherFolder(oldDir, newDir):
+    folder = os.path.exists(newDir)
+    if not folder:
+        os.makedirs(newDir)
+        print('Make a new folder')
+    else:
+        print('There is this folder')
+    shutil.copy(oldDir, newDir)
+
 if __name__ == "__main__":
     filePath = 'E:\\WeatherData\\ghcnd-stations.csv'
     stations, lats, lons = read(filePath)
@@ -50,4 +63,7 @@ if __name__ == "__main__":
                 print(stations[i])
     # print(collectionStations)
     print(len(collectionStations))
+    for i in range(len(collectionStations)):
+        oldDir = os.path.join(_ROOTDIR, collectionStations[i] + '.csv')
+        CopyFileToAnotherFolder()
 
